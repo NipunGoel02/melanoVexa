@@ -245,3 +245,28 @@ python classifiers/multiple_classifier/val.py --mode best --val_dir data/val/ --
 This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the [LICENSE.md](LICENSE) file for details.
 
 ## Acknowledgments
+
+## Local Research Dashboard
+
+The project includes a responsive local web dashboard for image inference, model comparison, Grad-CAM visualization, saved analysis history, validation metrics, and PDF reports. It loads the checkpoints under `out/` directly; it does not create simulated predictions. The image upload, SQLite history, generated heatmaps, and cached validation metrics stay in the local `app_data/` folder (ignored by Git).
+
+From the project root, activate the existing environment and start the server:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+python app.py
+```
+
+Then open [http://127.0.0.1:8000](http://127.0.0.1:8000). The dashboard uses CUDA when available and falls back to CPU. The first visit to **Model performance** computes precision, recall, F1, accuracy, Cohen's kappa, and confusion matrices from `data_mult/val/`; the result is cached locally. The analysis report can be downloaded as PDF from an individual result or saved case.
+
+This is a research demonstration, not a clinical diagnostic tool. Model scores and visual explanations must not be used as a substitute for professional medical assessment.
+
+### SCC-focused research ablation
+
+To compare the plain EfficientNet head, feature attention, and attention with focal loss under a matched weighted-sampling protocol, run:
+
+```powershell
+python classifiers/multiple_classifier/fit_research.py --experiment all --epochs 10 --batch_size 8 --seed 42
+```
+
+The ablation selects checkpoints using held-out macro-F1 and writes a manifest plus per-image validation predictions under `out/research_ablation/`. See [RESEARCH_PLAN.md](RESEARCH_PLAN.md) for the hypothesis, outcomes, and limitations. Repeat with multiple seeds and reserve an untouched test set before making final paper claims.

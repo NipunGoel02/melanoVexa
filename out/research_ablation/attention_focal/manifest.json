@@ -1,0 +1,395 @@
+{
+  "experiment": "attention_focal",
+  "model": "EfficientNet-B0",
+  "head": "feature_attention",
+  "loss": "multiclass_focal",
+  "focal_gamma": 2.0,
+  "sampler": "inverse_frequency_weighted_random_sampler",
+  "seed": 42,
+  "mixed_precision": true,
+  "epochs_requested": 10,
+  "best_epoch": 4,
+  "checkpoint_selection": "highest held-out validation macro-F1",
+  "train_dir": "data_mult\\train",
+  "validation_dir": "data_mult\\val",
+  "train_images": 5082,
+  "validation_images": 1270,
+  "training_class_counts": {
+    "BCC": 1993,
+    "MEL": 2713,
+    "SCC": 376
+  },
+  "validation_class_counts": {
+    "BCC": 498,
+    "MEL": 678,
+    "SCC": 94
+  },
+  "validation_metrics": {
+    "accuracy": 0.8440944881889764,
+    "macro_precision": 0.5601100772727875,
+    "macro_recall": 0.6082501095828743,
+    "macro_f1": 0.5814803415480535,
+    "scc_precision": 0.0,
+    "scc_recall": 0.0,
+    "scc_f1": 0.0,
+    "cohen_kappa": 0.7079171119267761,
+    "confusion_matrix": [
+      [
+        457,
+        41,
+        0
+      ],
+      [
+        63,
+        615,
+        0
+      ],
+      [
+        86,
+        8,
+        0
+      ]
+    ],
+    "classes": [
+      "BCC",
+      "MEL",
+      "SCC"
+    ],
+    "support": [
+      498,
+      678,
+      94
+    ]
+  },
+  "epoch_history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.4732497736301445,
+      "validation": {
+        "accuracy": 0.7519685039370079,
+        "macro_precision": 0.5285668794266678,
+        "macro_recall": 0.5557036405207852,
+        "macro_f1": 0.5213968008892177,
+        "scc_precision": 0.0,
+        "scc_recall": 0.0,
+        "scc_f1": 0.0,
+        "cohen_kappa": 0.5519956101057159,
+        "confusion_matrix": [
+          [
+            485,
+            13,
+            0
+          ],
+          [
+            208,
+            470,
+            0
+          ],
+          [
+            91,
+            3,
+            0
+          ]
+        ],
+        "classes": [
+          "BCC",
+          "MEL",
+          "SCC"
+        ],
+        "support": [
+          498,
+          678,
+          94
+        ]
+      }
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.3567615831311131,
+      "validation": {
+        "accuracy": 0.552755905511811,
+        "macro_precision": 0.5039482699893855,
+        "macro_recall": 0.6000072593140402,
+        "macro_f1": 0.42659328427951754,
+        "scc_precision": 0.1488970588235294,
+        "scc_recall": 0.8617021276595744,
+        "scc_f1": 0.25391849529780564,
+        "cohen_kappa": 0.3360430611087793,
+        "confusion_matrix": [
+          [
+            42,
+            47,
+            409
+          ],
+          [
+            45,
+            579,
+            54
+          ],
+          [
+            7,
+            6,
+            81
+          ]
+        ],
+        "classes": [
+          "BCC",
+          "MEL",
+          "SCC"
+        ],
+        "support": [
+          498,
+          678,
+          94
+        ]
+      }
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.27876470679258186,
+      "validation": {
+        "accuracy": 0.621259842519685,
+        "macro_precision": 0.5644294849960446,
+        "macro_recall": 0.5921753920848776,
+        "macro_f1": 0.486538685115033,
+        "scc_precision": 0.14628297362110312,
+        "scc_recall": 0.648936170212766,
+        "scc_f1": 0.238747553816047,
+        "cohen_kappa": 0.40312551297183635,
+        "confusion_matrix": [
+          [
+            101,
+            58,
+            339
+          ],
+          [
+            34,
+            627,
+            17
+          ],
+          [
+            21,
+            12,
+            61
+          ]
+        ],
+        "classes": [
+          "BCC",
+          "MEL",
+          "SCC"
+        ],
+        "support": [
+          498,
+          678,
+          94
+        ]
+      }
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.2464285513539335,
+      "validation": {
+        "accuracy": 0.8440944881889764,
+        "macro_precision": 0.5601100772727875,
+        "macro_recall": 0.6082501095828743,
+        "macro_f1": 0.5814803415480535,
+        "scc_precision": 0.0,
+        "scc_recall": 0.0,
+        "scc_f1": 0.0,
+        "cohen_kappa": 0.7079171119267761,
+        "confusion_matrix": [
+          [
+            457,
+            41,
+            0
+          ],
+          [
+            63,
+            615,
+            0
+          ],
+          [
+            86,
+            8,
+            0
+          ]
+        ],
+        "classes": [
+          "BCC",
+          "MEL",
+          "SCC"
+        ],
+        "support": [
+          498,
+          678,
+          94
+        ]
+      }
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.21495122723765187,
+      "validation": {
+        "accuracy": 0.5968503937007874,
+        "macro_precision": 0.5526680771323218,
+        "macro_recall": 0.6061580156060128,
+        "macro_f1": 0.44308251310560137,
+        "scc_precision": 0.148,
+        "scc_recall": 0.7872340425531915,
+        "scc_f1": 0.24915824915824913,
+        "cohen_kappa": 0.38460373644261897,
+        "confusion_matrix": [
+          [
+            42,
+            45,
+            411
+          ],
+          [
+            21,
+            642,
+            15
+          ],
+          [
+            8,
+            12,
+            74
+          ]
+        ],
+        "classes": [
+          "BCC",
+          "MEL",
+          "SCC"
+        ],
+        "support": [
+          498,
+          678,
+          94
+        ]
+      }
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.19055147253531068,
+      "validation": {
+        "accuracy": 0.631496062992126,
+        "macro_precision": 0.587896356619023,
+        "macro_recall": 0.6215807811677262,
+        "macro_f1": 0.4946528087828314,
+        "scc_precision": 0.15789473684210525,
+        "scc_recall": 0.7340425531914894,
+        "scc_f1": 0.2598870056497175,
+        "cohen_kappa": 0.4237056745152946,
+        "confusion_matrix": [
+          [
+            93,
+            48,
+            357
+          ],
+          [
+            27,
+            640,
+            11
+          ],
+          [
+            15,
+            10,
+            69
+          ]
+        ],
+        "classes": [
+          "BCC",
+          "MEL",
+          "SCC"
+        ],
+        "support": [
+          498,
+          678,
+          94
+        ]
+      }
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.16961486719692379,
+      "validation": {
+        "accuracy": 0.668503937007874,
+        "macro_precision": 0.6183701918161838,
+        "macro_recall": 0.6415329301893445,
+        "macro_f1": 0.5412627190790941,
+        "scc_precision": 0.16414141414141414,
+        "scc_recall": 0.6914893617021277,
+        "scc_f1": 0.2653061224489796,
+        "cohen_kappa": 0.47451753541087627,
+        "confusion_matrix": [
+          [
+            144,
+            33,
+            321
+          ],
+          [
+            28,
+            640,
+            10
+          ],
+          [
+            19,
+            10,
+            65
+          ]
+        ],
+        "classes": [
+          "BCC",
+          "MEL",
+          "SCC"
+        ],
+        "support": [
+          498,
+          678,
+          94
+        ]
+      }
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.15784684710266175,
+      "validation": {
+        "accuracy": 0.6377952755905512,
+        "macro_precision": 0.6088792265170541,
+        "macro_recall": 0.6468951182877496,
+        "macro_f1": 0.5043952569328362,
+        "scc_precision": 0.16703296703296702,
+        "scc_recall": 0.8085106382978723,
+        "scc_f1": 0.2768670309653916,
+        "cohen_kappa": 0.4385931193542187,
+        "confusion_matrix": [
+          [
+            93,
+            39,
+            366
+          ],
+          [
+            24,
+            641,
+            13
+          ],
+          [
+            11,
+            7,
+            76
+          ]
+        ],
+        "classes": [
+          "BCC",
+          "MEL",
+          "SCC"
+        ],
+        "support": [
+          498,
+          678,
+          94
+        ]
+      }
+    }
+  ],
+  "note": "Internal tuning results; do not report as final test performance."
+}

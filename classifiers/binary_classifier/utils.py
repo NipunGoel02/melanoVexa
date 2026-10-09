@@ -1,7 +1,7 @@
 import torch
 from torchvision import transforms
 from torchvision.models import inception_v3, efficientnet_b0, Inception_V3_Weights, EfficientNet_B0_Weights
-from cnn import CustomClassifier
+from .cnn import CustomClassifier
 from torch.utils.data import DataLoader
 from torchvision.datasets import ImageFolder
 

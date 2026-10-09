@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8f7">
+  <title>MelanoVexa · Skin Lesion Research Studio</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#overview" aria-label="MelanoVexa home">
+        <span class="brand-mark"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4v28M4 18h28M8.1 8.1l19.8 19.8m0-19.8L8.1 27.9"/><circle cx="18" cy="18" r="5"/></svg></span>
+        <span><strong>MelanoVexa</strong><small>SKIN LESION RESEARCH</small></span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-page="overview"><span class="nav-icon">◫</span> Overview</button>
+        <button class="nav-item" data-page="analysis"><span class="nav-icon">⌕</span> Image analysis</button>
+        <button class="nav-item" data-page="history"><span class="nav-icon">◷</span> Case history <span class="nav-count" id="history-count">0</span></button>
+        <button class="nav-item" data-page="performance"><span class="nav-icon">⌁</span> Model performance</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="device-card"><span class="status-dot"></span><div><strong>Local inference</strong><small id="device-label">Checking device…</small></div></div>
+        <div class="profile"><div class="avatar">ML</div><div><strong>Melanoma project</strong><small>Research workspace</small></div><span class="profile-menu">···</span></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="breadcrumbs"><span>Workspace</span><b>/</b><strong id="crumb-current">Overview</strong></div>
+        <div class="top-actions"><span class="local-badge"><i></i> LOCAL &amp; PRIVATE</span><button class="icon-button" id="help-button" title="About this demo">?</button></div>
+      </header>
+
+      <section class="page active" id="page-overview">
+        <div class="page-heading"><div><div class="eyebrow">MELANOMA CLASSIFICATION · RESEARCH DEMO</div><h1>Good morning <span class="wave">✳</span></h1><p class="muted">Your model workspace at a glance.</p></div><button class="button button-primary" data-go="analysis"><span>＋</span> New image analysis</button></div>
+        <div class="stat-grid">
+          <article class="stat-card"><div class="stat-top"><span>Total analyses</span><span class="stat-icon teal">⌕</span></div><strong id="stat-total">0</strong><small>Saved to this device</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Models available</span><span class="stat-icon blue">◈</span></div><strong id="stat-models">—</strong><small>Loaded from project checkpoints</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Validation images</span><span class="stat-icon amber">▧</span></div><strong id="stat-validation">1,270</strong><small>data_mult/val · 3 lesion classes</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Inference device</span><span class="stat-icon violet">⌘</span></div><strong class="device-stat" id="stat-device">—</strong><small>Image stays on this machine</small></article>
+        </div>
+
+        <div class="section-heading"><div><h2>Recent cases</h2><p class="muted">Your latest image analyses</p></div><button class="text-button" data-go="history">View case history <span>→</span></button></div>
+        <div class="table-card"><div class="table-scroll"><table><thead><tr><th>CASE</th><th>IMAGE</th><th>MODEL PREDICTION</th><th>CONFIDENCE</th><th>DATE</th><th></th></tr></thead><tbody id="recent-cases"><tr><td colspan="6" class="empty-cell">No analyses yet. Upload a dermoscopic image to get started.</td></tr></tbody></table></div></div>
+
+        <div class="section-heading performance-title"><div><h2>Experiment snapshot</h2><p class="muted">Reported validation results from the project experiments</p></div><button class="text-button" data-go="performance">Explore metrics <span>→</span></button></div>
+        <div class="experiment-grid" id="experiment-cards"><div class="experiment-card skeleton"></div><div class="experiment-card skeleton"></div><div class="experiment-card skeleton"></div></div>
+        <div class="notice"><span class="notice-icon">i</span><p><strong>Research demonstration.</strong> Model predictions and confidence scores are experimental and are not a medical diagnosis. Always seek qualified clinical review.</p></div>
+      </section>
+
+      <section class="page" id="page-analysis">
+        <div class="page-heading compact-heading"><div><div class="eyebrow">MODEL INFERENCE</div><h1>Analyze an image</h1><p class="muted">Upload a dermoscopic image to compare your trained classifiers.</p></div><span class="local-badge"><i></i> PROCESSED LOCALLY</span></div>
+        <div class="analysis-layout">
+          <div class="upload-column">
+            <div class="panel upload-panel">
+              <div class="panel-heading"><div><h3>Image input</h3><p>PNG, JPG or WebP · up to 12 MB</p></div><span class="step-number">01</span></div>
+              <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Choose a dermoscopic image">
+                <input type="file" id="file-input" accept="image/png,image/jpeg,image/webp" hidden>
+                <div class="upload-symbol"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="9" width="34" height="30" rx="5"/><circle cx="18" cy="19" r="3.5"/><path d="m10 34 10-10 7 7 5-5 7 8"/><path d="M24 3v12m-5-5 5-5 5 5"/></svg></div>
+                <strong>Drop a dermoscopic image here</strong><span>or <b>browse files</b> from your device</span>
+                <small>Your image is analyzed on this machine and saved in local case history.</small>
+              </div>
+              <div class="preview-wrap hidden" id="preview-wrap"><div class="preview-image"><img id="preview-image" alt="Selected dermoscopic image"><button class="remove-image" id="remove-image" title="Remove image">×</button></div><div class="file-meta"><strong id="file-name">image.jpg</strong><span id="file-size">—</span></div></div>
+              <div class="upload-error hidden" id="upload-error"></div>
+              <button class="button button-primary run-button" id="run-analysis" disabled><span>✦</span> Run model analysis <span class="button-arrow">→</span></button>
+              <div class="privacy-note"><span>⌑</span> Local inference · Image data is not sent to a cloud service</div>
+            </div>
+            <div class="panel model-list-panel"><div class="panel-heading"><div><h3>Models in this run</h3><p>Loaded from saved project checkpoints</p></div><span class="step-number">02</span></div><div id="model-list" class="model-list"><div class="model-list-row">Checking saved checkpoints…</div></div></div>
+          </div>
+
+          <div class="results-column">
+            <div class="panel result-panel" id="result-panel">
+              <div class="panel-heading"><div><h3>Analysis result</h3><p>Predictions from your trained models</p></div><span class="step-number">03</span></div>
+              <div id="result-placeholder" class="result-placeholder"><div class="placeholder-art"><div class="placeholder-ring ring-one"></div><div class="placeholder-ring ring-two"></div><span>✦</span></div><strong>Results will appear here</strong><p>Choose an image and run model analysis to see the predicted category, confidence and visual explanation.</p></div>
+              <div id="result-content" class="hidden">
+                <div class="prediction-banner"><div><span class="prediction-label">ATTENTION MODEL PREDICTION</span><div class="prediction-class"><span id="prediction-dot" class="class-dot"></span><strong id="prediction-class">—</strong><span id="prediction-confidence" class="confidence-chip">—</span></div><small>Model output · not a diagnosis</small></div><div class="prediction-symbol">✳</div></div>
+                <div class="probability-block"><div class="subheading"><strong>Class probabilities</strong><span>Feature Attention model</span></div><div id="probability-bars"></div></div>
+                <div class="comparison-block"><div class="subheading"><strong>Compare models</strong><span>Same image · same input pipeline</span></div><div id="comparison-list"></div></div>
+                <div class="result-actions"><button class="button button-secondary" id="download-report">↓ Download PDF report</button><button class="button button-quiet" data-go="history">View saved case →</button></div>
+              </div>
+            </div>
+            <div class="panel explain-panel" id="explain-panel"><div class="panel-heading"><div><h3>Visual explanation</h3><p>Grad-CAM · attention model</p></div><span class="explain-badge">HOW IT LOOKS</span></div><div id="heatmap-placeholder" class="heatmap-placeholder"><span>◎</span><p>Grad-CAM overlay will be generated after analysis.</p></div><div id="heatmap-view" class="heatmap-view hidden"><div class="heatmap-images"><figure><img id="original-result-image" alt="Uploaded image"><figcaption>ORIGINAL</figcaption></figure><figure><img id="heatmap-image" alt="Grad-CAM heatmap overlay"><figcaption>MODEL ATTENTION</figcaption></figure></div><div class="heatmap-caption"><span class="heat-legend"></span>Warmer regions indicate areas that contributed more to this prediction.</div></div></div>
+          </div>
+        </div>
+        <div class="clinical-notice"><span>!</span><p><strong>Research use only.</strong> This model has not been validated for clinical decision-making. A prediction or confidence score cannot replace a dermatologist’s examination.</p></div>
+      </section>
+
+      <section class="page" id="page-history">
+        <div class="page-heading compact-heading"><div><div class="eyebrow">LOCAL CASE ARCHIVE</div><h1>Analysis history</h1><p class="muted">Search and revisit images analyzed in this browser session and saved on this machine.</p></div><button class="button button-primary" data-go="analysis"><span>＋</span> New analysis</button></div>
+        <div class="history-toolbar"><div class="searchbox"><span>⌕</span><input id="history-search" placeholder="Search by image name or category…"></div><span class="history-total" id="history-total">0 saved cases</span></div>
+        <div class="table-card"><div class="table-scroll"><table><thead><tr><th>CASE</th><th>IMAGE</th><th>PREDICTED CATEGORY</th><th>MODEL</th><th>CONFIDENCE</th><th>ANALYZED</th><th></th></tr></thead><tbody id="history-cases"><tr><td colspan="7" class="empty-cell">Loading case history…</td></tr></tbody></table></div></div>
+        <div class="history-footnote">Case images and prediction records are stored locally in this project’s <code>app_data/</code> folder.</div>
+      </section>
+
+      <section class="page" id="page-performance">
+        <div class="page-heading compact-heading"><div><div class="eyebrow">EXPERIMENT EVALUATION</div><h1>Model performance</h1><p class="muted">Metrics recomputed from the saved checkpoints and held-out validation split.</p></div><span class="metric-status" id="metric-status"><i></i> Waiting to load</span></div>
+        <div class="metric-source" id="metric-source"><span>i</span><p>Metrics come from <code>data_mult/val</code> and the checkpoint files in <code>out/</code>. Results are recalculated on first visit and cached locally.</p></div>
+        <div class="research-panel"><div class="research-panel-head"><div><span class="eyebrow">RESEARCH QUESTION</span><h2>How does focal loss change the SCC sensitivity vs macro-F1 trade-off?</h2><p>Controlled EfficientNet-B0 ablation · same data split, weighted sampler and optimizer</p></div><span class="research-status" id="research-status">PILOT RESULTS</span></div><div class="research-grid"><div class="research-finding"><span>01 · OBSERVED GAP</span><strong>Rare SCC class</strong><p>SCC is 376 / 5,082 training images (~7.4%). Overall accuracy can hide missed SCC cases.</p></div><div class="research-finding"><span>02 · PILOT FINDING</span><strong>Attention misses SCC</strong><p>At macro-F1-selected checkpoints, both attention variants had 0 SCC recall. Plain CE reached 67.0% on this internal split.</p></div><div class="research-finding proposed"><span>03 · NEW ABLATION</span><strong>Focal loss did not fix it</strong><p>Attention + focal changed macro-F1 by just 0.0011 vs attention + CE; SCC recall stayed at 0. This is a failure analysis result, not a model improvement claim.</p></div></div><div class="research-foot"><span><b>Checkpoint selection</b> validation macro-F1</span><span><b>SCC outcome</b> recall at selected checkpoint</span><span><b>Comparison</b> plain CE · attention CE · attention focal</span></div></div>
+        <div class="section-heading research-runs-heading"><div><h2>Controlled ablation runs</h2><p class="muted">Fresh runs selected by held-out macro-F1; results shown here only after training completes</p></div><span class="source-tag" id="research-run-count">0/3 runs</span></div><div class="research-runs" id="research-runs"><div class="research-run-empty">No controlled ablation checkpoints yet. Run <code>fit_research.py --experiment all</code> to create them.</div></div>
+        <div class="metric-card-grid" id="metric-card-grid"><div class="metric-card skeleton"></div><div class="metric-card skeleton"></div><div class="metric-card skeleton"></div></div>
+        <div class="analytics-grid"><div class="panel chart-panel"><div class="panel-heading"><div><h3>Performance curves</h3><p id="curve-subtitle">Macro precision, recall and F1-score · per model</p></div><div class="chart-tabs"><button class="active" data-chart="scores">Scores</button><button data-chart="roc">ROC curves</button></div></div><div class="chart-wrap" id="score-chart"><div class="chart-loading">Loading validation metrics…</div></div><div class="chart-legend" id="score-legend"><span><i class="legend-blue"></i> Precision</span><span><i class="legend-green"></i> Recall</span><span><i class="legend-amber"></i> F1-score</span></div></div>
+          <div class="panel confusion-panel"><div class="panel-heading"><div><h3>Confusion matrix</h3><p id="confusion-model-name">Select a model</p></div><select id="confusion-select" aria-label="Choose confusion matrix model"></select></div><div id="confusion-matrix" class="confusion-matrix"><div class="chart-loading">Validation metrics load here.</div></div><div class="matrix-caption">Rows = actual category · columns = predicted category</div></div></div>
+        <div class="experiment-section"><div class="section-heading"><div><h2>Recorded experiments</h2><p class="muted">Previously reported project validation results</p></div><span class="source-tag">classifiers/multiple_classifier/results.json</span></div><div class="metric-source"><span>i</span><p>Historical entries were not recomputed in the controlled ablation. The <code>binary_scc</code> entry is a binary task; do not compare its accuracy directly with the three-class runs above.</p></div><div id="recorded-experiments" class="recorded-experiments"></div></div>
+        <div class="clinical-notice"><span>!</span><p><strong>Interpretation note.</strong> Validation performance describes this dataset split; it does not establish real-world or clinical performance. Confidence scores are model probabilities and are not clinically calibrated.</p></div>
+      </section>
+
+      <footer class="app-footer"><span>MelanoVexa <b>·</b> Skin Lesion Research Studio</span><span>Built with project-trained PyTorch checkpoints</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <div class="modal-backdrop hidden" id="case-modal"><div class="case-modal"><button class="modal-close" id="modal-close">×</button><div id="modal-content"></div></div></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>
